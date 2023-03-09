@@ -16,7 +16,7 @@ echo "EC2 instance created with ID: $instance_id"
 aws ec2 wait instance-status-ok --instance-ids $instance_id --region $region
 
 # Sleep for 2 minutes before terminating instance
-echo "Waiting for 5 minutes before terminating EC2 instance..."
+echo "Waiting for 2 minutes before terminating EC2 instance..."
 sleep 120
 
 # Terminate EC2 instance
