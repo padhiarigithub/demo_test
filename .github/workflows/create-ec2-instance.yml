@@ -1,0 +1,27 @@
+name: Create EC2 instance and terminate after 2 minutes
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  create-instance:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Install AWS CLI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y awscli
+      - name: Set up AWS credentials
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: |
+          aws configure set default.region ap-southeast-1
+      - name: Run shell script
+        run: |
+          chmod +x create-ec2-instance.sh
+          ./create-ec2-instance.sh
