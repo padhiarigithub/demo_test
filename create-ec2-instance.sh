@@ -19,14 +19,6 @@ aws ec2 wait instance-status-ok --instance-ids $instance_id --region $region
 echo "Waiting for 5 minutes before terminating EC2 instance..."
 sleep 120
 
-# Transfer additional shell script to EC2 instance
-echo "Transferring additional script to EC2 instance..."
-scp -i ~/.ssh/your-key-pair.pem additional-script.sh ec2-user@ec2-instance-ip:/home/ec2-user
-
-# Execute additional shell script on EC2 instance
-echo "Executing additional script on EC2 instance..."
-ssh -i ~/.ssh/your-key-pair.pem ec2-user@ec2-instance-ip 'chmod +x additional-script.sh && ./additional-script.sh'
-
 # Terminate EC2 instance
 aws ec2 terminate-instances --instance-ids $instance_id --region $region
 
