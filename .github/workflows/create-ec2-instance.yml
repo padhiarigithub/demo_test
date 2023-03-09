@@ -1,5 +1,11 @@
 name: Create EC2 instance and terminate after 2 minutes
-'on':
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Test/Prod'
+        required: true
   push:
     branches:
       - main
